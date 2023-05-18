@@ -4,8 +4,8 @@ import Nav from '@components/Nav';
 import Provider from '@components/Provider';
 
 export const metadata ={
-	title: 'Don Events',
-	description: 'Events for the donation'
+	title: 'Google Sign In',
+	description: 'Using Next Auth'
 }
 
 const RootLayout = ({ children }) =>{
