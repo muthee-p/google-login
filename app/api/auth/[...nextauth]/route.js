@@ -41,7 +41,9 @@ const handler = NextAuth({
         return false
       }
     },
-  
+    pages: {
+    signIn: "/dashboard",
+  },
 })
 
 export { handler as GET, handler as POST }
