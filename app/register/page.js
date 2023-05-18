@@ -1,7 +1,17 @@
-import React from 'react'
+'use client'
+import { useState } from 'react'
 import Link from 'next/link';
 
-const Form = ({type, theEvent, setTheEvent, submitting, handleSubmit}) =>{
+const Register = () =>{
+	
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const handleSubmit = (e) =>{
+		e.preventDefault();
+	}
+
 	return(
 		<section className='w-full max-w-full flex-start flex-col'>
 			<h1 className='head_text text-left'>{type}
@@ -13,38 +23,55 @@ const Form = ({type, theEvent, setTheEvent, submitting, handleSubmit}) =>{
 			className='mt-10 w-full max-2xl flex flex-col gap-7 glassmorphism'>
 			<label>
 				<span className='font-satoshi font-semibold text-base text-gray-700'> 
-				Event title</span>
+				Enter Name </span>
 			
 			<input 
-			value={theEvent.theName} 
-			onChange={(e) => setTheEvent({ ...theEvent, theName: e.target.value })}
+			value={name} 
+			onChange={(e) => setName({e.target.value })}
 			type='text'
 			required
-			placeholder='Event name here'
+			placeholder='user name here'
 			className='form_input' 
 			/>
 			</label>
 
 			<label>
 				<span className='font-satoshi font-semibold text-base text-gray-700'> 
-				Event date </span>
+				Enter email </span>
 			
 			<input 
-			value={theEvent.theDate} 
-			onChange={(e) => setTheEvent({ ...theEvent, theDate: e.target.value })}
-			required
+			value={email} 
+			onChange={(e) => setEmail({e.target.value })}
 			type='text'
+			required
+			placeholder='email here'
+			className='form_input' 
+			/>
+			</label>
+
+
+			<label>
+				<span className='font-satoshi font-semibold text-base text-gray-700'> 
+				Enter your password </span>
+			
+			<input 
+			value={password} 
+			onChange={(e) => setPassword({e.target.value })}
+			required
+			type='password'
 			className='form_input'
-			placeholder='Event date here'
+			placeholder='your password'
 			/>
 			</label>
 			<div className='flex-end mx-3 mb-5 gap-4'>
 				<Link href='/' className='text-gray-500 text-sm' > Cancel</Link>
-				<button type='submit' disabled={ submitting }
+				
+				<button type='submit' 
 				className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'>
-				{submitting ? '${type}...' : type}
-
+				Register
 				</button>
+				<p> Already a member? <Link href="/login">Login</Link>
+				</p>
 			</div>
 
 			</form>
@@ -52,4 +79,4 @@ const Form = ({type, theEvent, setTheEvent, submitting, handleSubmit}) =>{
 		)
 }
 
-export default Form
+export default Register

@@ -1,6 +1,6 @@
 
 
-const Home = () =>{
+const Dashboard = () =>{
 	return(
 		<section className='w-full flex-center flex-col'>
 			<h1 className='head_text text-center'>Welcome</h1>
@@ -14,4 +14,4 @@ const Home = () =>{
 		)
 }
 
-export default Home
+export default Dashboard

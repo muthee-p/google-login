@@ -1,21 +1,38 @@
-import { Schema, model, models } from 'mongoose';
+//import { Schema, model, models } from 'mongoose';
 
-const UserSchema = new Schema({
+import mongoose, { model } from "mongoose";
+import bcrypt from "bcryptjs";
+
+//const UserSchema = new Schema({
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'name is required!'],
+    match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+  },
   email: {
     type: String,
     unique: [true, 'Email already exists!'],
     required: [true, 'Email is required!'],
   },
-  username: {
+  
+  password: {
     type: String,
-    required: [true, 'Username is required!'],
+    required: [true, 'password is required!'],
     match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
   },
-  image: {
-    type: String,
-  }
 });
 
-const User = models.User || model("User", UserSchema);
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
 
-export default User;
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
+export default mongoose.models.User || mongoose.model("User", userSchema);
+
+//const User = models.User || model("User", UserSchema);
+
+//export default User;
